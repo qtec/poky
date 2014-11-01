@@ -263,8 +263,10 @@ class DpkgIndexer(Indexer):
             with open(os.path.join(arch_dir, "Release"), "w+") as release:
                 release.write("Label: %s\n" % arch)
 
-            cmd += "PSEUDO_UNLOAD=1 %s release . >> Release" % apt_ftparchive
-            
+            cmd += "PSEUDO_UNLOAD=1 %s release . >> Release;" % apt_ftparchive
+            cmd += "rm -f Release.gpg;"
+            cmd += "gpg -abs -o Release.gpg Release || true"
+
             index_cmds.append(cmd)
 
             deb_dirs_found = True
