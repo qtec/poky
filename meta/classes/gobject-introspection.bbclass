@@ -13,8 +13,6 @@ DEPENDS_append = " gobject-introspection gobject-introspection-native qemu-nativ
 
 # This is necessary for python scripts to succeed - distutils fails if these
 # are not set
-export BUILD_SYS
-export HOST_SYS
 export STAGING_INCDIR
 export STAGING_LIBDIR
 
