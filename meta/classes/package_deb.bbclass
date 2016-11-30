@@ -151,8 +151,10 @@ python do_package_deb () {
                 data = d.getVar(i, True)
                 if data is None:
                     raise KeyError(f)
-                if i == 'DPKG_ARCH' and d.getVar('PACKAGE_ARCH', True) == 'all':
-                    data = 'all'
+                if i == 'DPKG_ARCH':
+                    pkgarch = d.getVar('PACKAGE_ARCH', True)
+                    if pkgarch == 'all' or pkgarch.startswith('buildtools-dummy-'):
+                        data = 'all'
                 elif i == 'PACKAGE_ARCH' or i == 'DPKG_ARCH':
                    # The params in deb package control don't allow character
                    # `_', so change the arch's `_' to `-'. Such as `x86_64'
